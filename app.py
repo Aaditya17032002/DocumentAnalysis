@@ -4,10 +4,15 @@ from io import BytesIO
 from PyPDF2 import PdfReader
 from docx import Document
 import re
-import time  # Import time to simulate progress in the example
+import time,json  # Import time to simulate progress in the example
 
-# Replace with your Gemini API key
-GEMINI_API_KEY = 'AIzaSyDeuWtt_SrE1_7OJgGFjvHZ_iqeqUjZIgY'
+# Function to load API key from JSON file
+def load_api_key():
+    with open('config.json', 'r') as f:
+        config = json.load(f)
+    return config.get('GEMINI_API_KEY')
+
+GEMINI_API_KEY = load_api_key()
 
 # Configure the Generative AI client
 genai.configure(api_key=GEMINI_API_KEY)
